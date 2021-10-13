@@ -1,7 +1,7 @@
 // firebaseのURL変える時はNewTask.jsも忘れずに
 // App.jsではfirebaseから受け取るコード
 // NewTask.jsはfirebaseにユーザ入力をstoreする
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 
 import Tasks from './components/Tasks/Tasks';
 import NewTask from './components/NewTask/NewTask';
@@ -12,7 +12,7 @@ function App() {
 
   // use-http.jsのapplyDataの部分
   // custom hookプラスこのApp.js特有のdata specific部分を書いている
-  const transformTasks = (tasksObj) => {
+  const transformTasks = useCallback((tasksObj) => {
     const loadedTasks = [];
 
     for (const taskKey in tasksObj) {
@@ -20,24 +20,17 @@ function App() {
     }
 
     setTasks(loadedTasks);
-  };
+  }, []);
 
   // use-http.js(custom hook)利用する
 
-  const {
-    isLoading,
-    error,
-    sendRequest: fetchTasks,
-  } = useHttp(
-    {
-      url: 'https://react-hooks-sc15-default-rtdb.asia-southeast1.firebasedatabase.app/tasks.json',
-    },
-    transformTasks
-  );
+  const { isLoading, error, sendRequest: fetchTasks } = useHttp(transformTasks);
 
   useEffect(() => {
-    fetchTasks();
-  }, []);
+    fetchTasks({
+      url: 'https://react-hooks-sc15-default-rtdb.asia-southeast1.firebasedatabase.app/tasks.json',
+    });
+  }, [fetchTasks]);
 
   const taskAddHandler = (task) => {
     setTasks((prevTasks) => prevTasks.concat(task));
