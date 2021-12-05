@@ -16,7 +16,7 @@ function App() {
     setError(null);
     try {
       const response = await fetch(
-        'https://react-hooks-sc15-default-rtdb.asia-southeast1.firebasedatabase.app/tasks.json'
+        'https://customhook-http-ch15-99035-default-rtdb.firebaseio.com/tasks.json'
       );
 
       if (!response.ok) {
