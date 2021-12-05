@@ -19,7 +19,7 @@ const NewTask = (props) => {
   const enterTaskHandler = async (taskText) => {
     sendTaskRequest(
       {
-        url: 'https://react-hooks-sc15-default-rtdb.asia-southeast1.firebasedatabase.app/tasks.json',
+        url: 'https://customhook-http-ch15-99035-default-rtdb.firebaseio.com/tasks.json',
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

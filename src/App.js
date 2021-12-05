@@ -31,7 +31,7 @@ function App() {
     };
     fetchTasks(
       {
-        url: 'https://react-hooks-sc15-default-rtdb.asia-southeast1.firebasedatabase.app/tasks.json',
+        url: 'https://customhook-http-ch15-99035-default-rtdb.firebaseio.com/tasks.json',
       },
       // 2. transformTasksを第２引数に入れる
       transformTasks
